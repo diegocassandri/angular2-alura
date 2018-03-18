@@ -12,10 +12,16 @@ export class BotaoComponent{
     @Input() tipo : string = 'button';
     @Input() desabilitado : boolean = false;
     @Output() acao = new EventEmitter();
+    @Input() confirmacao : boolean = false;
 
     executaAcao(){
-        if(confirm("Deseja realmente excluir?")){
-            this.acao.emit(null);
+        if(this.confirmacao){
+            if(confirm("Deseja realmente excluir?")){
+                this.acao.emit(null);
+            }
+            return;
         }
+        this.acao.emit(null);
+        
     }
 }
